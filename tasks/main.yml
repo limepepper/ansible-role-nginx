@@ -1,0 +1,15 @@
+---
+
+- tags: [ nginx ]
+  block:
+
+    # install the packages
+    - include_tasks: install/main.yml
+      tags: always
+
+    - name: nginx_opts options components
+      tags: always
+      include_tasks: "{{ nginx_opts_item }}/main.yml"
+      with_items: "{{ nginx_opts }}"
+      loop_control:
+        loop_var: nginx_opts_item
